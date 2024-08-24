@@ -1,0 +1,433 @@
+\documentclass[12pt,article,oneside]{memoir}
+\usepackage{latexsym}
+\usepackage[activeacute,spanish]{babel}
+\usepackage[colorlinks=true, urlcolor=blue, linkcolor=red]{hyperref}
+
+\setcounter{secnumdepth}{5} % Note that part is -1 level !
+\setcounter{tocdepth}{5}
+
+\title{Desarrollador Fullstack Senior\\T\'opicos para entrevista}
+\author{Jorge Rivera\\jorge.rivera@ssde.com.mx}
+\date{July 2024}
+
+\begin{document}
+\maketitle
+\newpage
+\tableofcontents*
+\newpage
+
+\part{  Generales}
+	\chapter{Patrones de dise\~no}
+	Un patr\'on de dise\~no es una soluci\'on general repetible a un problema que ocurre comunmente. No es un dise\~no 
+	terminado que pueda convertirse directamente a c\'odigo. Es una descripci\'on o plantilla de c\'omo resolver un problema 
+	que puede ser utilizado en muchas situaciones diferentes.\\
+	
+	\textbf{Usos de patrones de dise\~no}\\
+	
+	Los patrones de dise\~no pueden acelerar el proceso de desarrollo a trav\'es de paradigmas de desarrollo probados y 
+	comprobados. El dise\~no de software efectivo requiere considerar problemas que pueden no ser visibles  sino hasta 
+	tarde en la implementaci\'on. Reusar patrones de dise\~no ayuda a prevenir problemas sutiles que pueden generar problemas
+	mayores y mejora la legibilidad del c\'odigo para desarrolladores y arquitectos familiarizados con los patrones.\\
+	
+	Los patrones de dise\~no comunes pueden ser mejorados iterativamente haciendolos m\'as robustosque dise\~nnos a medida.\\
+	
+	Los patrones pueden dividirse en 3 tipos
+	
+	\begin{itemize}
+		\item Patrones creacionistas,
+		\item Patrones estructurales y
+		\item Patrones de comportamiento
+	\end{itemize}
+	\newpage
+	
+		\section{Patrones creacionistas}
+		
+		\'Estos patrones se tratan de instanciaci\'on de clases . Pueden dividirse a su vez en patrones de creaci\'on de 
+		clases y patrones de creaci\'on de objetos. Mientras que los primeros usan la herencia efectivamente en el proceso 
+		de instanciaci\'on, los segundos usan la delegaci\'on efectivamente para completar su trabajo.\\
+		
+		Algunos ejemplos de \'este tipo de patr\'on son:
+		
+		\begin{itemize}
+			\item \textbf{Fabrica abstracta (Abstract Factory):}\\
+			Crea una instancia de varias familias de clase. El cliente 
+			de software	usa un interfaz gen\'erica de la fabrica para crear objetos concretos que son parte de la familia. 
+			El cliente no sabe que objetos concretos recibe de cada una de \'estas f\'abricas internas porque usa s\'olo las 
+			interfaces gen\'ericas de sus productos
+			
+			\item \textbf{Constructor (Builder):}\\
+			Separa la representaci\'on de un objeto de su implementaci\'on. \'Este 
+			patr\'on a diferencia de tros patrones creacionistas no requiere que se tengan interfaces comunes. \'Esto hace 
+			posible crear diferentes productos usango el mismo proceso de construcci\'on. \'Este patr\'on puede reconocerse 
+			en una clase que tiene un solo metodo para crearla y varios metodos para configurar el objeto resultante. Lo objetos 
+			de \'este patr\'on comunmente soportan el encadenado. Ex:\\
+			\begin{verbatim}
+			 someBuilder.setValueA(1).setValueB(2).create();
+			\end{verbatim}
+			
+			\item \textbf{M\'etodo de F\'abrica (Factory Method):}\\
+			\'Este patr\'on de dise\~no provee una forma de crear objetos pero permite a las subclases alterar el tipo de 
+			objeto que ser\'a creado. Si tenemos un m\'etodo de creaci\'on en la clase base subclases que la extienden, 
+			pudieramos estar hablando de \'este patr\'on. Ex:
+			\begin{verbatim}
+			abstract class Department {
+				public abstract function createEmployee($id);
+				
+				public function fire($id) {
+        			$employee = $this->createEmployee($id);
+        			$employee->paySalary();
+        			$employee->dismiss();
+    			}
+			}
+			
+			class ITDepartment extends Department {
+				public function createEmployee($id) {
+					return new Programmer();
+				}
+			}
+			
+			class AccountingDepartment extends Department {
+				public function createEmployee($id) {
+					return new Accountant();
+				}
+			}
+			\end{verbatim}
+			
+			\item \textbf{Alberca de objetos (Objects pool):}\\
+			Provee una alberca de objetos pre-inicializados que pueden ser reutilizados en lugar de crearlos y destruirlos 
+			bajo demanda. \'Esto mejora el desempe\~no y reduce el sobre-trabajo de crear y destruir objetos
+			
+			\item \textbf{Prototipo (Prototype):}\\
+			Las clases prototipo deben tener una interfaz com\'un que haga posiblecopiar objetos a\'un si sus clases concretas 
+			son desconocidas. Los objetos prototipo puedenn producir copias completas debido a que los objetos de la misma 
+			clase pueden acceder a las propiedades privadas una de la otra.
+			
+			\item \textbf{Singleton:}\\
+			En \'este patr\'on de dise\~no s\'olo puede existir una instancia de cada clase.
+			\newpage
+			
+		\end{itemize}
+		\newpage
+	
+		\section{Patrones estructurales}
+		\'Estos patrones se tratan de composici\'on de clases y objetos. \'Estos patrones de creaci\'on de clases usan la 
+		herencia para componer interfaces. Se definen formas de acomodar objetos para obtener nueva funcionalidad.\\
+		
+		Algunos ejemplos de \'este tipo de patr\'on son:
+		\begin{itemize}
+			\item \textbf{Adaptador (Adapter):} Empata interfaces con distintas clases. Permite que objetos con distintas 
+			interfaces colaborar.
+			
+			\item \textbf{Puente (Bridge):} \'Este es un patr\'on que nos permite dividir un clase grande o un conjunto de 
+			clases relacionadas estrechamente en 2 jerarqu\'ias separadas \textit{abstracci\'on} e \textit{implementaci\'on}, 
+			las cuales pueden desarrollarse independientes una de otra.\\
+			
+			En \'este patr\'on los t\'erminos abstracci\'on e implementaci\'on no son los mismos que utilizamos en nuestros
+			lenguajes de programaci\'on, \'estos se definen a continuaci\'on:
+			\begin{itemize}
+				\item[+] \textbf{Abstracci\'on:} Es la capa de control de m\'as alto nivel. \'Esta capa no se supone que haga 
+				ning\'un tipo de trabajo. \'Esta debe solo delegar el trabajo a la capa de implementaci\'on (plataforma).
+				
+				\item[+] \textbf{Implementaci\'on:} \'Esta se refiere a la capa donde se procesan nuestras peticiones de la 
+				capa anterior, por ejemplo una API o un servicio.
+			\end{itemize}
+			
+			\item \textbf{Compuestos (Composed):} \'Este patr\'on nos permite componer objetos en estructura de \'arbol y 
+			luego trabajar con \'estas estructuras como si fueran objetos individuales. 
+			M\'as detalles \href{https://refactoring.guru/design-patterns/composite}{aqu\'i}
+			
+			\item \textbf{Decorador (Decorator):} Permite adjuntar nuevos comportamientos a objetos al ponerlos dentro de 
+			objetos envoltorio que contienen dichos comportamientos.
+			M\'as detalles \href{https://refactoring.guru/design-patterns/decorator}{aqu\'i}
+			
+			\item \textbf{Facade:} Provee una interfaz simplificada a una librer\'ia, framework o alg\'un otro conjunto de 
+			clases complejas. M\'as detalles \href{https://refactoring.guru/design-patterns/facade}{aqu\'i}\\ \\
+			
+			\item \textbf{Peso mosca (flyweight):} Permite acomodar m\'as objetos en la cantidad disponible de RAM 
+			compartiendo partes de su estado entre m\'ultiples objetos en lugar de mantener todos los datos en cada 
+			objeto. M\'as detalles \href{https://refactoring.guru/design-patterns/flyweight}{aqu\'i}
+			
+			\item \textbf{Datos de clase privada (Private data class):} Restringe el acceso al estado interno de un objeto
+			mejorando la seguridad y reduciendo los riesgos de corrupci\'on de datos por medio de m\'etodos de acceso 
+			controlados
+			
+			\item \textbf{Proxy:} Provee un sustituto o ancla para otro objeto. Un proxy controla el acceso al objeto 
+			original permitiendonos realizar acciones ya sea antes o despu\'es de que el requerimiento llega al objeto 
+			original. M\'as detalles \href{https://refactoring.guru/design-patterns/proxy}{aqu\'i}
+		\end{itemize}
+		\newpage
+	
+		\section{Patrones de comportamiento}
+		\'Estos patrones se tratan de la comunicaci\'on de clases de objetos. \'Estos patrones son aquellos que est\'an
+		m\'as espec\'ificamente preocupados por la comunicaci\'on entre objetos.\\
+		
+		Algunos ejemplos de \'estos patrones son:
+		
+		\begin{itemize}
+			\item \textbf{Cadena de responsabilidad (Cahin of Responsibility):} Permite pasar requerimientos a trav\'es de 
+			una cadena de manejadores. Al recibir el requerimiento cada manejador decide ya sea procesarlo o pasarlo al 
+			siguiente manejador en la cadena. 
+			M\'as detalles \href{https://refactoring.guru/design-patterns/chain-of-responsibility}{aqu\'i}
+		\end{itemize}
+		\newpage
+		
+	\chapter{AWS}
+	\newpage
+	
+	\chapter{Docker/Kubernates}
+	
+\part{  Desarrollo Back End}
+	\chapter{Java Core}	
+	Java fue desarrollado originalmente por James Gosling para Sun Microsystems en Mayo de 1995 como un componente base de la 
+	plaaforma de Java de Sun. Las librerias, compiladores y m\'aquinas virtuales originales fueron lanzadas bajo licencias 
+	propietarias de Sun. A partir de 2007 en cumplimiento con las nirmas de Java Community Process, Sun cambi\'o su licencia 
+	de la mayr\'ia de sus tecnolog\'ias Java a la licencia GPL-2.0-only. Oracle tiene su propia implementaci\'on de m\'aquina 
+	virtual, sin embargo la versi\'on oficial es la de OpenJDK la cual es gratuita, de c\'odigo abierto y la m\'as utilizada 
+	por los desarrolladores y es la versi\'on defacto utilizada por casi todas las distribuciones de Linux.\\
+	
+	A continuaci\'on se detallan varias particularidades de \'este lenguaje.
+	
+		\section{Tipos de dato}
+		Java no es un LPOO completo porque tenemos tipos de datos primitivos, ie; int, long, boolean, double as\'i como sus 
+		clases contenedores Integer, Long, Double, Boolean. \\
+		
+		En un LPOO todos los elementos son objetos, no hay tipos primitivos.
+		
+		\section{Modificadores de acceso}
+		Todos los objetos en Java pueden restringirse usando los modificadores public, private protected y default, \'este 
+		\'ultimo no es necesario utilizarlo, al no utilizar ning\'un modificador se toma \'este por defecto, a continuaci\'on 
+		se definen los alcances de los diferentes modificadores.
+		
+			\begin{itemize}
+				\item \textbf{default:} El alcance de \'este modificador es a nivel de paquete, esto es, cualquier objeto dentro 
+				del mismo paquete puede acceder a la propiedad o m\'etodo.
+				
+				\item \textbf{private:} \'Este modificadores el m\'as restrictivo, permite acceso solo a los elementos de la 
+				clase a la cual pertenecen.
+				
+				\item \textbf{protected:} Permiten acceso a elementos del mismo paquete o sus subclases inclusive si \'estas no 
+				est\'an dentro del mismo paquete.
+				
+				\item \textbf{public:} \'Este es el m\'as permisivo de todos, permite acceso desde cualquier clase o metodo
+				dentro de la aplicaci\'on
+			\end{itemize}
+			
+		Los modificadores son importantes porque nos permiten:
+		
+			\begin{itemize}
+				\item \textbf{Encapsulamiento:} Nos permiten encapsular codigo en clases y exponer solo las partes del 
+				c\'odigo que requiere acceso. \'Esto reduce la dependencia entre clases.
+
+				\item \textbf{Previene mal uso:} Previene mal uso de metodos y propiedades en formas que no se tienen 
+				planificadas.
+				
+				\item \textbf{Seguridad:} Restringir el acceso a datos y metodos sensibles mejora la seguridad porque 
+				esconde detalles de implementaci\'on a potenciales atacantes.
+				
+				\item \textbf{Refactorizaci\'on:} El c\'odigo que utiliza modificadores apropiados es m\'as f\'acil de 
+				simplificar porque reducir la visibilidad no rompe otros c\'odigo.
+				
+				\item \textbf{Legibilidad:} Hacen el c\'odigo m\'as facil de leer porque expl\'icitamente se asume 
+				quienes pueden acceder a los componentes.
+				
+				\item \textbf{Reuso:} Las clases que hacen buen uso de los modificadores ser\'an m\'as f\'aciles de 
+				reutilizar en otros proyectos sin modificaciones extensas.
+				
+				\item \textbf{Control de Interfaz:} Permiten definir interfaces publicas estables para clases mientras 
+				se mantiene la implementaci\'on privada
+			\end{itemize}
+			
+			Para mayor informaci\'on referente a modificadores de acceso y su implementaci\'on visite la 
+			\href{https://www.simplilearn.com/tutorials/java-tutorial/access-modifiers#what_are_access_modifiers_in_java}{liga}.			
+		\section{Gen\'ericos}
+		Fueron introducidos en Java 1.5, se buscaba reducir los errores y adicionar una capa extra de abstracci\'on 
+		a los tipos.\\
+		
+		Imaginemos que tenemos el c\'odigo siguiente:
+			\begin{verbatim}
+				List list = new LinkedList();
+				list.add(new Integer(1)); 
+				Integer i = list.iterator().next();
+			\end{verbatim}
+		
+		Sorprendentemente el compilador nos mandar\'a un error en la \'ultima l\'inea porque no sabe el tipo de dato que 
+		se regresa. El compilador necesita un cast expl\'icito:
+			\begin{verbatim}
+				Integer i = (Integer) list.iterator.next();
+			\end{verbatim}
+		
+		Nada nos garantiza que el tipo de dato devuelto por la lista es un $Integer$, la lista que definimos puede contener 
+		objetos de cualquier tipo. Nosotros solo sabemos que estamos recibiendo una lista al inspeccionar el contexto. Cuando 
+		vemos los tipos, solo podemos garantizar que es un objeto y por lo tanto se necesita de un cast expl\'icito para 
+		asegurar que el tipo es el adecuado.\\
+		
+		Hacer cast es engorroso - sabemos que el tipo de dato en la lista en un $Integer$. El cast tambi\'en nos infla 
+		el c\'odigo y puede generar errores en tiempo de ejecuci\'on relacionados a tipos de datos si un programador 
+		comete un error con la conversi\'on de tipos.\\
+		
+		Lo m\'as sencillo es que los programadores expresen sus intenciones de utilizar un tipo espec\'ifico de dato y que el 
+		compilador se asegure de la correctez de dichos tipos. \'Esta es la idea detr\'as de los gen\'ericos.\\
+		
+		Modifiquemos el c\'odigo para incluir los genericos:
+			\begin{verbatim}
+			List<Integer> list = new LinkedList<>();
+			\end{verbatim}
+		Al agregar el operador diamante $<>$ conteniendo el tipo de dato, especializamos la lista para solo utilizar el tipo 
+		$Integer$. En otras palabras, especificamos el tipo de dato que la lista contiene. Em compilador entonces puede 
+		forzar el tipo al tiempo de compilar.\\
+		
+		En programas peque\~nos puede verse trivial pero para programas m\'as grandes \'esto puede agregar robustez y hacer 
+		el c\'odigo f\'acil de leer.
+		
+		\section{Map, HashMap, LinkedHashMap, TreeMap, ConcurrentHashMap}
+		
+			\begin{itemize}
+				\item \textbf{Map:} Es una interfaz con una correspondencia clave-valor
+
+				\item \textbf{HashMap:} Es un Map que utiliza una hash table para su implementación. Permite nulos en claves 
+				o valores
+				
+				\item \textbf{HashTable:} Es una versión sincronizada de HashMap. No permite nulos en claves o valores.
+				
+				\item \textbf{TreeMap:} Usa un árbol para implementar un Map. Ordena los elementos de acuerdo a un iterador, 
+				si no se especifica uno se oprdenan naturalmente en orden ascendente
+				
+				\item \textbf{ConcurrentHashMap:} Permite a varios hilos que lo accedan al mismo tiempo y de forma segura
+				
+				\item \textbf{LinkedHashMap:} Conserva el orden de iteración de los objetos que fueron insertados (otros no 
+				proporcionan un orden de iteración fijo)
+			\end{itemize}
+			
+			\'Esta misma diferencuaci\'on puede hacerse con las colleciones List y Set. 
+		
+	\chapter{Cambios entre versiones}
+	A trav\'es de los a\~nos \'este lenguaje ha recibido una considerable cantidad de mejoras, desde su introducci\'on en 
+	el a\~no 1995 hasta la fecha.\\
+	
+	Java gan\'o mucha popularidad desde su lanzamiento y ha sido popular desde entonces. En 2022 era el 3er lenguaje 
+	m\'as popular seg\'un Github. Aunque es vastamente utilizado, ha habido un declive en su uso en a\~nos recientes.\\
+	
+	Hasta Marzo de 2024, Java 22 es la \'ultima version. Java 8, 11 17 y 21 son las anteriores versiones LTS que todav\'ia 
+	tienen soporte.\\
+	
+	
+		\section{Cambios Java 8}
+		\'Esta versi\'on fue la m\'as esperada actualizaci\'on de Java debido a que en toda la historia de \'este lenguaje 
+		no hab\'ian sido liberadas tantos cambios significativos. \'Esta liberaci\'on se di\'o el 18 de Marzo de 2014. \'Esta 
+		nueva versi\'on vino acompa\~nada de soporte para programaci\'on funcional, nuevas APIs, un nuevo motor de JavaScript 
+		y otros cambios que ser\'an detallados a continuaci\'on \\
+			
+			\subsection{Expresiones lambda}
+			\'Estas permiten una representaci\'on concisa de funciones an\'onimas, habilitando paradigmas de programaci\'on 
+			funcional en Java.\\
+			
+			Una expresi\'on lambda consiste en una lista de par\'ametros, un token de flecha $\rightarrow$ y un cuerpo. Son 
+			particularmente  \'utiles para implementar interfaces de un solo m\'etodo (interfaces funcionales) y para pasar
+			comportamiento como par\'ametro a un m\'etodo.
+			
+			\'Estas expresiones ayudan a reducir codigo com\'un y para hacer el c\'odigo m\'as legible y mantenible.
+			
+			\subsection{Interfaces funcionales}
+			Se introduce la anotaci\'on $@FunctionalInterface$ para definir las interfaces con un solo metodo abstracto. \'Estas 
+			interfaces facilitan el uso de expresiones lambda y referencias de metodo, habilitando los patrones de programaci\'on 
+			funcional.\\
+		
+			\subsection{Introducci\'on y mejora de APIs}
+				\subsubsection{Introducci\'on de API Stream}
+				\subsubsection{Introducci\'on de API Date/Time}
+				\subsubsection{Mejora de API Collection}
+				\subsubsection{Mejora de API Concurrency}
+				
+			\subsection{Clase optional}
+			
+			\subsection{forEach e interfaces iterables} 
+			Cada vez que necesitamos recorrer una colleci\'on es necesario crear un iterador cuyo prop\'osito es simplemente 
+			recorrer la colecci\'on y luego tenemos la l\'ogica en un ciclo por cada uno de los elementos en dicha colecci\'on.
+			
+			\subsection{M\'etodos default}
+			
+			\subsection{M\'etodos est\'aticos}
+			
+			\subsection{Referencias a m\'etodos}
+			\newpage
+	
+		\section{Cambios Java 11}
+		\newpage
+	
+		\section{Cambios Java 17}
+		\newpage
+			
+		\section{Cambios Java 21}
+		\newpage
+		
+		\section{Collections}
+			\subsection{Lists}
+			\newpage
+			\subsection{Sets}
+			\newpage
+			\subsection{Maps}
+		\newpage
+		
+		\section{Streams}
+		\newpage
+	
+	\chapter{Hibernate}
+	\newpage
+
+	\chapter{Spring Boot}
+		\section{Anotaciones}
+			\subsection{@Repository}
+			\subsection{@Service}
+			\subsection{@Controller}
+			\subsection{@RestController}
+				\subsubsection{@GetMapping}
+				\subsubsection{@PostMapping}
+				\subsubsection{@PutMapping}
+	\newpage
+		\section{JPA}
+	\newpage
+			\subsection{Anotaciones}
+				\subsubsection{ @Entity }
+				\subsubsection{ @Table }
+				\subsubsection{ @Id }
+				\subsubsection{ @GeneratedValue }
+				\subsubsection{ @OneToOne }
+				\subsubsection{ @OneToMany }
+				\subsubsection{ @ManyToMany }
+				\subsubsection{ @JoinColumn }
+				\subsubsection{ @JoinTable }
+	\newpage
+			\subsection{Interfaces Repositorio}
+	\newpage
+		\section{Pruebas}
+			\subsection{Unitarias}
+			\subsection{Integraci\'on}
+	\newpage
+		\section{Seguridad}
+			\subsection{OAuth2}
+			\subsection{OKTA}
+			\subsection{JWT}
+	\newpage
+			
+\part{  Desarrollo Front End}
+	\chapter{Angular}
+	\newpage
+		\section{CLI}
+	\newpage
+	 	\section{Estructura de una aplicaci\'on}
+	\newpage
+		\section{Modulos}
+	\newpage
+		\section{Servicios}
+	\newpage
+		\section{Componentes}
+			\subsection{Compartiendo datos entre componentes}
+				\begin{itemize}
+					\item Padre a hijo: @Input
+					\item Hijo a padre: @Output and EventEmitter
+					\item Hijo a padre: @ViewChild
+					\item Componentes no relacionados: Usando servicios
+				\end{itemize}
+	\newpage
+	
+\end{document}

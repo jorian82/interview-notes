@@ -1,0 +1,32 @@
+\documentclass[12pt,article,oneside]{memoir}
+\usepackage{latexsym}
+\usepackage[activeacute,spanish]{babel}
+
+\setcounter{secnumdepth}{5} % Note that part is -1 level !
+\setcounter{tocdepth}{5}
+
+\author{Jorge Rivera\\jorge.rivera@ssde.com.mx}
+\title{Test document}
+
+\begin{document}
+\maketitle
+\newpage
+\tableofcontents*
+\newpage
+%\begingroup
+%\let\clearpage\relax
+%\let\newpage\relax
+%\tableofcontents*
+%\endgroup
+%\newpage
+
+\part{Secci\'on}
+	\chapter{Capitulo}
+	\newpage
+	
+	\chapter{Capitulo}
+	\newpage
+		
+		\section{sub capitulo}
+
+\end{document}
