@@ -237,7 +237,7 @@
 				se mantiene la implementaci\'on privada
 			\end{itemize}
 			
-			Para mayor informaci\'on referente a modificadores de acceso y su implementaci\'on visite la 
+			Para mayor informaci\'on referente a modificadores de acceso y su implementaci\'on visite la siguiente 
 			\href{https://www.simplilearn.com/tutorials/java-tutorial/access-modifiers#what_are_access_modifiers_in_java}{liga}.			
 		\section{Gen\'ericos}
 		Fueron introducidos en Java 1.5, se buscaba reducir los errores y adicionar una capa extra de abstracci\'on 
@@ -273,7 +273,7 @@
 			List<Integer> list = new LinkedList<>();
 			\end{verbatim}
 		Al agregar el operador diamante $<>$ conteniendo el tipo de dato, especializamos la lista para solo utilizar el tipo 
-		$Integer$. En otras palabras, especificamos el tipo de dato que la lista contiene. Em compilador entonces puede 
+		$Integer$. En otras palabras, especificamos el tipo de dato que la lista contiene. El compilador entonces puede 
 		forzar el tipo al tiempo de compilar.\\
 		
 		En programas peque\~nos puede verse trivial pero para programas m\'as grandes \'esto puede agregar robustez y hacer 
@@ -298,7 +298,7 @@
 				proporcionan un orden de iteración fijo)
 			\end{itemize}
 			
-			\'Esta misma diferencuaci\'on puede hacerse con las colleciones List y Set. 
+			\'Esta misma diferencuaci\'on puede hacerse con las colecciones List y Set. 
 		
 	\chapter{Cambios entre versiones}
 	A trav\'es de los a\~nos \'este lenguaje ha recibido una considerable cantidad de mejoras, desde su introducci\'on en 
@@ -307,15 +307,17 @@
 	Java gan\'o mucha popularidad desde su lanzamiento y ha sido popular desde entonces. En 2022 era el 3er lenguaje 
 	m\'as popular seg\'un Github. Aunque es vastamente utilizado, ha habido un declive en su uso en a\~nos recientes.\\
 	
-	Hasta Marzo de 2024, Java 22 es la \'ultima version. Java 8, 11 17 y 21 son las anteriores versiones LTS que todav\'ia 
+	Hasta Marzo de 2024, Java 22 es la \'ultima version. Java 8, 11, 17 y 21 son las versiones LTS que todav\'ia 
 	tienen soporte.\\
 	
 	
-		\section{Cambios Java 8}
+		\section{Cambios en Java 8}
 		\'Esta versi\'on fue la m\'as esperada actualizaci\'on de Java debido a que en toda la historia de \'este lenguaje 
 		no hab\'ian sido liberadas tantos cambios significativos. \'Esta liberaci\'on se di\'o el 18 de Marzo de 2014. \'Esta 
 		nueva versi\'on vino acompa\~nada de soporte para programaci\'on funcional, nuevas APIs, un nuevo motor de JavaScript 
 		y otros cambios que ser\'an detallados a continuaci\'on \\
+		
+		https://www.digitalocean.com/community/tutorials/java-8-features-with-examples\\
 			
 			\subsection{Expresiones lambda}
 			\'Estas permiten una representaci\'on concisa de funciones an\'onimas, habilitando paradigmas de programaci\'on 
@@ -328,12 +330,24 @@
 			\'Estas expresiones ayudan a reducir codigo com\'un y para hacer el c\'odigo m\'as legible y mantenible.
 			
 			\subsection{Interfaces funcionales}
-			Se introduce la anotaci\'on $@FunctionalInterface$ para definir las interfaces con un solo metodo abstracto. \'Estas 
-			interfaces facilitan el uso de expresiones lambda y referencias de metodo, habilitando los patrones de programaci\'on 
+			Se introduce la anotaci\'on $@FunctionalInterface$ para definir las interfaces con un solo metodo abstracto aunque
+			no es obligatorio, se pueden tener varios m\'etodos default y est\'aticos dentro de la interfaz. \'Estas interfaces 
+			facilitan el uso de expresiones lambda y referencias de metodo, habilitando los patrones de programaci\'on 
 			funcional.\\
-		
+			
 			\subsection{Introducci\'on y mejora de APIs}
+			Con la llegada de \'esta nueva versi\'on llegaron varias APIs que eran muy utilizadas y eran de terceros y otras
+			que se adoptaron de otros lenguajes
 				\subsubsection{Introducci\'on de API Stream}
+				\'Esta API se introdujo para procesar colecciones de objetos con el estilo de c\'odigo funcional usando 
+				expresiones lambda. Para entender lo  que es la API Stream debes tener conocimiento de ambos, expresiones 
+				lambda e inteerfaces funcionales.\\
+				
+					https://www.geeksforgeeks.org/difference-between-streams-and-collections-in-java/\\
+				
+				Collection is an in-memory data structure, which holds all the values that the data structure currently has. Every element in the Collection has to be computed before we add it to the Collection. Operations such as searching, sorting, insertion, manipulation, and deletion can be performed on a Collection. It provides many interfaces like (Set, List, Queue, Deque) and Classes like (ArrayList, Vector, LinkedList, PriorityQueue, HashSet).\\
+				
+				On the other hand, IStream is an API that is introduced in Java 8 which is used to process collections of objects. A stream is a sequence of objects that supports various methods which can be pipelined to produce the desired result. The Stream API is used to process collections of objects.
 				\subsubsection{Introducci\'on de API Date/Time}
 				\subsubsection{Mejora de API Collection}
 				\subsubsection{Mejora de API Concurrency}
@@ -351,13 +365,13 @@
 			\subsection{Referencias a m\'etodos}
 			\newpage
 	
-		\section{Cambios Java 11}
+		\section{Cambios en Java 11}
 		\newpage
 	
-		\section{Cambios Java 17}
+		\section{Cambios en Java 17}
 		\newpage
 			
-		\section{Cambios Java 21}
+		\section{Cambios en Java 21}
 		\newpage
 		
 		\section{Collections}
@@ -376,13 +390,23 @@
 
 	\chapter{Spring Boot}
 		\section{Anotaciones}
+			\subsection{@Autowired}
 			\subsection{@Repository}
 			\subsection{@Service}
+				\subsubsection{@Primary}
+				\subsubsection{@Qualifier}
 			\subsection{@Controller}
 			\subsection{@RestController}
+				\subsubsection{@RequestMapping}
+				\subsubsection{@RequestBody}
+				\subsubsection{@PathVariable}
 				\subsubsection{@GetMapping}
 				\subsubsection{@PostMapping}
 				\subsubsection{@PutMapping}
+				\subsubsection{@PatchMapping}
+				\subsubsection{@DeleteMapping}
+			\subsection{@ControllerAdvice}
+				\subsubsection{@ExceptionHandler}
 	\newpage
 		\section{JPA}
 	\newpage
@@ -428,6 +452,9 @@
 					\item Hijo a padre: @ViewChild
 					\item Componentes no relacionados: Usando servicios
 				\end{itemize}
+	\newpage
+	
+	\chapter{React}
 	\newpage
 	
 \end{document}
