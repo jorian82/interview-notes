@@ -189,7 +189,7 @@
 	
 		\section{Tipos de dato}
 		Java no es un LPOO completo porque tenemos tipos de datos primitivos, ie; int, long, boolean, double as\'i como sus 
-		clases contenedores Integer, Long, Double, Boolean. \\
+		clases contenedor Integer, Long, Double, Boolean. \\
 		
 		En un LPOO todos los elementos son objetos, no hay tipos primitivos.
 		
@@ -335,25 +335,6 @@
 			facilitan el uso de expresiones lambda y referencias de metodo, habilitando los patrones de programaci\'on 
 			funcional.\\
 			
-			\subsection{Introducci\'on y mejora de APIs}
-			Con la llegada de \'esta nueva versi\'on llegaron varias APIs que eran muy utilizadas y eran de terceros y otras
-			que se adoptaron de otros lenguajes
-				\subsubsection{Introducci\'on de API Stream}
-				\'Esta API se introdujo para procesar colecciones de objetos con el estilo de c\'odigo funcional usando 
-				expresiones lambda. Para entender lo  que es la API Stream debes tener conocimiento de ambos, expresiones 
-				lambda e inteerfaces funcionales.\\
-				
-					https://www.geeksforgeeks.org/difference-between-streams-and-collections-in-java/\\
-				
-				Collection is an in-memory data structure, which holds all the values that the data structure currently has. Every element in the Collection has to be computed before we add it to the Collection. Operations such as searching, sorting, insertion, manipulation, and deletion can be performed on a Collection. It provides many interfaces like (Set, List, Queue, Deque) and Classes like (ArrayList, Vector, LinkedList, PriorityQueue, HashSet).\\
-				
-				On the other hand, IStream is an API that is introduced in Java 8 which is used to process collections of objects. A stream is a sequence of objects that supports various methods which can be pipelined to produce the desired result. The Stream API is used to process collections of objects.
-				\subsubsection{Introducci\'on de API Date/Time}
-				\subsubsection{Mejora de API Collection}
-				\subsubsection{Mejora de API Concurrency}
-				
-			\subsection{Clase optional}
-			
 			\subsection{forEach e interfaces iterables} 
 			Cada vez que necesitamos recorrer una colleci\'on es necesario crear un iterador cuyo prop\'osito es simplemente 
 			recorrer la colecci\'on y luego tenemos la l\'ogica en un ciclo por cada uno de los elementos en dicha colecci\'on.
@@ -363,6 +344,80 @@
 			\subsection{M\'etodos est\'aticos}
 			
 			\subsection{Referencias a m\'etodos}
+			
+			\subsection{Introducci\'on y mejora de APIs}
+			Con la llegada de \'esta nueva versi\'on llegaron varias APIs que eran muy utilizadas y eran de terceros y otras
+			que se adoptaron de otros lenguajes
+				\subsubsection{Introducci\'on de API Stream}
+				\'Esta API se introdujo para procesar operaciones filter/map/reduce con colecciones de objetos con el estilo 
+				de c\'odigo funcional usando expresiones lambda. Para entender lo  que es la API Stream debes tener conocimiento 
+				de ambos, expresiones lambda e interfaces funcionales.\\
+				
+				\'Esta API tambi\'en permite ejecuciones paralelas y secuenciales. \'Esta es una de las mejores caracter\'isticas 
+				porque permite trabajar con con colecciones y Big Data por las operaciones de filtrado que se ejecutan con 
+				regularidad. Para utlizar \'estas caracter\'isticas tenemos las funciones stream() y parallelStream().\\
+				
+				Las colecciones difieren en varias formas de los streams, por una parte, las colecciones son estructuras que se 
+				almacenan en memoria, la cual almacena sus valores. Cada elemento en la colecci\'on debe ser calculado antes de 
+				ser almacenado en la misma. Las operaciones de b\'usqueda, ordenamiento, inserci\'on manipulaci\'on y borrado 
+				pueden realizarse en las colecciones. Cuenta con muchas interfaces como Set, List, Queue, Deque y varias clases 
+				como ArrayList, Vector LinkedList, PriorityQueue y HashSet.\\
+				
+				Por otro lado, Stream es una API, es una secuencia de objetos que usan varios metodos que pueden ser ligados 
+				para obtener el resultado deseado. M\'as informaci\'on \href{https://www.geeksforgeeks.org/difference-between-streams-and-collections-in-java/}{aqu\'i}\\
+				
+				\subsubsection{Introducci\'on de API Date/Time}
+				
+				Siempre ha sido dif\'icil trabajar con Fechas, Horas y Zonas horarias en Java. No hab\'ia una forma est\'andar 
+				para realizar \'estas operaciones. Una de las mejores adiciones en Java 8 fue el paquete java.time que aceler\'o 
+				el proceso de trabajar con horas y fechas en java.\\
+				
+				Simplemente con ver los paquetes de \'esta API, podemos inferir que ser\'a muy f\'acil de utilizar. Tiene algunos 
+				subpaquetes java.time.format que provee clases para imprimir y dar formato a fechas y horas y el subpaquete 
+				java.time.zone que provee ayuda con las reglas de las zonas horarias.
+				
+				\'Esta nueva API favorece el uso de enums sobre las constantes enteras para meses y dias de la semana. Una de 
+				las clases \'utiles es DateTimeFormatter para convertir objetos DateTime	en cadenas. M\'as informaci\'on 
+				\href{https://www.digitalocean.com/community/tutorials/java-8-date-localdate-localdatetime-instant}{aqu\'i}\\
+				
+				\subsubsection{Mejora de API Collection}
+				
+				Ya vimos el m\'etodo forEach y la API Stream para las colecciones, tambi\'en hay otras adiciones a la API 
+				Collections, las cuales detallaremos a continuaci\'on:\\
+				\begin{itemize}
+					\item \textbf{forEachRemaining(Consumer action):} Es un iterador que realiza la acci\'on dada para cada 
+					elemento remanente en la colecci\'on hasta que todos los elementos hayan sido procesados o la acci\'on lance 
+					una excepci\'on.
+					\item \textbf{removeIf(Predicate filter):} Es un m\'etodo que elimina todos los elementos que cumplen con la 
+					condici\'on dada.
+					\item \textbf{spliterator():} Es un m\'etodo que devuelve una instancia Spliterator que puede ser utilizada 
+					para recorrer elementos secualcial o paralelamente.
+					\item \textbf{replaceAll(), compute(), merge():} M\'etodos para la interfaz Map
+					\item \textbf{HashMap:} Mejoras en el desempe\~no con colisiones de claves (Key Collisions)
+				\end{itemize}
+				
+				\subsubsection{Mejora de API Concurrency}
+				
+				Las mejoras m\'as importantes son:
+				\begin{itemize}
+					\item \textbf{ConcurrentHasMap:} Nuevos m\'etodos compute(), forEach(), forEachEntry(), forEachKey(), 
+					forEachValue(), merge(), reduce() y search().
+					\item \textbf{CompletableFuture:} Acciones que pueden ser explicitamente completadas (asignando sus valores 
+					y estado).
+					\item \textbf{newWorkStealingPool():} M\'etodo ejecutpor que crea un hilo roba-trabajos que utiliza todos los procesadores disponibles como su nivel objetivo de paralelismo.
+				\end{itemize}
+				
+			\subsection{Clase optional}
+			
+			Todo programador est\'a familiarizado con \textit{NullPointerException}. \'Esto puede descarrilar el c\'odigo y es 
+			dif\'icil de evitar sin utlizar muchas revisiones de nulos. Es as\'i como en Java 8 se introdujo una clase Optional 
+			al paquete java.util. \'Esta nos ayuda a escribir c\'odigo sencillo sin utilizar tantas revisiones de nulos. Al 
+			utilizar Optional podemos especificar valores alternativos de retorno o asignar c\'odigo alternativo para ejecutar. 
+			\'Esto hace el c\'odigo m\'as legible porque situaciones que estaban ocultas est\'an ahora visibles al 
+			desarrollador.\\
+			
+			M\'as informaci\'on \href{https://www.geeksforgeeks.org/java-8-optional-class/}{aqu\'i}\\
+			
 			\newpage
 	
 		\section{Cambios en Java 11}
